@@ -46,23 +46,25 @@ USER 0
 ## копирование файлов установки эластика
 COPY ./ee/* /tmp/
 
-RUN yum makecache && \
-    yum install wget perl-Digest-SHA  -y && \
+RUN yum install perl-Digest-SHA  -y && \
     cd /tmp/ && \
     shasum -a 512 -c elasticsearch-7.17.9-linux-x86_64.tar.gz.sha512 && \
     tar -xzf elasticsearch-7.17.9-linux-x86_64.tar.gz && \
     rm -f *.tar.* && \
-    yum remove -y wget perl-Digest-SHA && \
+    yum remove -y perl-Digest-SHA && \
     yum clean all && \
     adduser elasticsearch && \
     mv elasticsearch-7.17.9 /var/lib/elasticsearch && \
+    chown -R elasticsearch:elasticsearch /var/lib/elasticsearch &&\
     cd /var/lib/elasticsearch/
 
-COPY elasticsearch.yml /var/lib/elasticsearch/config/
+#COPY elasticsearch.yml /var/lib/elasticsearch/config/
 
-RUN  chown -R elasticsearch:elasticsearch /var/lib/elasticsearch
+#RUN  chown -R elasticsearch:elasticsearch /var/lib/elasticsearch
 
 USER elasticsearch
+
+COPY elasticsearch.yml /var/lib/elasticsearch/config/
 
 ENV ES_HOME=/var/lib/elasticsearch \
     ES_PATH_CONF=/var/lib/elasticsearch/config
@@ -90,11 +92,12 @@ node.master: true
 
 - Ответ Elasticsearch` на запрос пути `/
 ```bash
+# docker run -dp 9200:9200 --name qqq vitaliy495/el
 # curl -X GET http://127.0.0.1:9200
 {
   "name" : "netology_test",
   "cluster_name" : "test-cluster",
-  "cluster_uuid" : "PIpMvWDFR9uxec9oNf6wKQ",
+  "cluster_uuid" : "gyJUl5QGR9ShuKiPpj5E_g",
   "version" : {
     "number" : "7.17.9",
     "build_flavor" : "default",

@@ -1,0 +1,11 @@
+path.data: /var/lib/elasticsearch
+#path.logs: /var/lib/logs
+node.name: netology_test
+http.port: 9200
+network.host: 0.0.0.0
+discovery.type: single-node
+cluster.name: test-cluster
+node.master: true
+
+
+#path.repo: /home/backup

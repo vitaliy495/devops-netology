@@ -1,0 +1,13 @@
+version: '3.6'
+services:
+  db:
+    image: mysql:8
+    container_name: mmm
+    environment:
+      MYSQL_ROOT_PASSWORD: 7777
+    ports:
+      - "3306:3306"
+    volumes:
+      - datamysql:/var/lib/mysql
+volumes:
+  datamysql:

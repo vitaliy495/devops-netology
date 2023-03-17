@@ -7,5 +7,4 @@ discovery.type: single-node
 cluster.name: test-cluster
 node.master: true
 
-
-#path.repo: /home/backup
+path.repo: /var/lib/elasticsearch/snapshots

@@ -15,6 +15,7 @@ RUN yum install perl-Digest-SHA  -y && \
     yum clean all && \
     adduser elasticsearch && \
     mv elasticsearch-7.17.9 /var/lib/elasticsearch && \
+    mkdir /var/lib/elasticsearch/snapshots && \
     chown -R elasticsearch:elasticsearch /var/lib/elasticsearch &&\
     cd /var/lib/elasticsearch/
 

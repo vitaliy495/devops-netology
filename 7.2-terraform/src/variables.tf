@@ -1,4 +1,4 @@
-/*
+
 ###cloud vars
 variable "token" {
   type        = string
@@ -72,4 +72,4 @@ variable "vm_web_memory" {
   default     = 1
   description =  "memory"
 }
-*/
+

@@ -7,11 +7,11 @@ variable "vm_db_image" {
   description = "OS image"
 }
 
-variable "vm_db_name" {
-  type        = string
-  default     = "netology-develop-platform-db"
-  description = "Name instance"
-}
+#variable "vm_db_name" {
+#  type        = string
+#  default     = "netology-develop-platform-db"
+#  description = "Name instance"
+#}
 
 variable "vm_db_cores" {
   type        = number

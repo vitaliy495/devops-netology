@@ -13,7 +13,8 @@ data "yandex_compute_image" "ubuntu" {
   family = var.vm_web_image
 }
 resource "yandex_compute_instance" "platform" {
-  name        = var.vm_web_name
+#  name        = var.vm_web_name
+  name        = "netology–${ local.env }–${ local.project }–${ local.role1 }"
   platform_id = "standard-v1"
   resources {
     cores         = var.vm_web_cores
@@ -45,7 +46,8 @@ data "yandex_compute_image" "ubuntu-db" {
   family = var.vm_db_image
 }
 resource "yandex_compute_instance" "platform-db" {
-  name        = var.vm_db_name
+#  name        = var.vm_db_name
+  name        = "netology–${ local.env }–${ local.project }–${ local.role2}"
   platform_id = "standard-v1"
   resources {
     cores         = var.vm_db_cores

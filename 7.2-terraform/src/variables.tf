@@ -50,11 +50,11 @@ variable "vm_web_image" {
   description = "OS image"
 }
 
-variable "vm_web_name" {
-  type        = string
-  default     = "netology-develop-platform-web"
-  description = "Name instance"
-}
+#variable "vm_web_name" {
+#  type        = string
+#  default     = "netology-develop-platform-web"
+#  description = "Name instance"
+#}
 
 variable "vm_web_cores" {
   type        = number

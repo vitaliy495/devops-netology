@@ -6,6 +6,6 @@ locals {
 }
 
 locals {
-  web_name = "netology–${ local.env }–${ local.project }–${ local.role1}"
-  db_name  = "netology–${ local.env }–${ local.project }–${ local.role2}"
+  web_name = "netology-${ local.env }-${ local.project }-${ local.role1}"
+  db_name  = "netology-${ local.env }-${ local.project }-${ local.role2}"
 }

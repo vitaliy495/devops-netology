@@ -14,7 +14,7 @@ data "yandex_compute_image" "ubuntu" {
 }
 resource "yandex_compute_instance" "platform" {
 #  name        = var.vm_web_name
-  name        = "netology–${ local.env }–${ local.project }–${ local.role1 }"
+  name        = local.web_name
   platform_id = "standard-v1"
   resources {
     cores         = var.vm_web_cores
@@ -47,7 +47,7 @@ data "yandex_compute_image" "ubuntu-db" {
 }
 resource "yandex_compute_instance" "platform-db" {
 #  name        = var.vm_db_name
-  name        = "netology–${ local.env }–${ local.project }–${ local.role2}"
+  name        = local.db_name
   platform_id = "standard-v1"
   resources {
     cores         = var.vm_db_cores
@@ -56,7 +56,7 @@ resource "yandex_compute_instance" "platform-db" {
   }
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.ubuntu.image_id
+      image_id = data.yandex_compute_image.ubuntu-db.image_id
     }
   }
   scheduling_policy {

@@ -34,42 +34,10 @@ variable "vpc_name" {
 
 
 ###ssh vars
-
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdBVvVCdO0xTMIigG5JCKE7mQjeoeuT1RBdqsB7Cl+w vit@vit-virtual-machine"
-  description = "ssh-keygen -t ed25519"
+variable "ssh_keys_and_serial_port" {
+  type = map(any)
+  default = {
+    "ssh-keys" = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdBVvVCdO0xTMIigG5JCKE7mQjeoeuT1RBdqsB7Cl+w vit@vit-virtual-machine"
+    "serial-port-enable" = 1
+  }
 }
-
-
-###vm_web_***
-
-variable "vm_web_image" {
-  type        = string
-  default     = "ubuntu-2004-lts"
-  description = "OS image"
-}
-
-#variable "vm_web_name" {
-#  type        = string
-#  default     = "netology-develop-platform-web"
-#  description = "Name instance"
-#}
-
-variable "vm_web_cores" {
-  type        = number
-  default     = 2
-  description =  "core resourse"
-}
-
-variable "vm_web_core_fraction" {
-  type        = number
-  default     = 5
-  description =  "core fraction"
-}
-variable "vm_web_memory" {
-  type        = number
-  default     = 1
-  description =  "memory"
-}
-

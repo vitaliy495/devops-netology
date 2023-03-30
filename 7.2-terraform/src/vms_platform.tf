@@ -1,3 +1,19 @@
+###vm_web_***
+
+variable "vm_web_image" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "OS image"
+}
+
+variable "vm_web_resources" {
+  type = map(any)
+  default = {
+       cpu  = 2
+       memory = 2
+       core_fraction = 5
+    }
+}
 
 ###vm_db_***
 
@@ -7,25 +23,11 @@ variable "vm_db_image" {
   description = "OS image"
 }
 
-#variable "vm_db_name" {
-#  type        = string
-#  default     = "netology-develop-platform-db"
-#  description = "Name instance"
-#}
-
-variable "vm_db_cores" {
-  type        = number
-  default     = 2
-  description =  "core resourse"
-}
-
-variable "vm_db_core_fraction" {
-  type        = number
-  default     = 20
-  description =  "core fraction"
-}
-variable "vm_db_memory" {
-  type        = number
-  default     = 2
-  description =  "memory"
+variable "vm_db_resources" {
+  type = map(any)
+  default = {
+       cpu  = 2
+       memory = 2
+       core_fraction = 20
+    }
 }

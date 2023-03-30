@@ -30,3 +30,26 @@ variable "vpc_name" {
   default     = "develop"
   description = "VPC network&subnet name"
 }
+
+variable "ssh_keys_and_serial_port" {
+  type = map(any)
+  default = {
+    "ssh-keys" = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdBVvVCdO0xTMIigG5JCKE7mQjeoeuT1RBdqsB7Cl+w vit@vit-virtual-machine"
+    "serial-port-enable" = 1
+  }
+}
+
+variable "vm_db_image" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "OS image"
+}
+
+variable "vm_db_resources" {
+  type = map(any)
+  default = {
+       cpu  = 2
+       memory = 2
+       core_fraction = 5
+    }
+}

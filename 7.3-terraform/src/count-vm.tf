@@ -27,6 +27,6 @@ resource "yandex_compute_instance" "web" {
     nat       = true
   }
 
-  metadata = var.ssh_keys_and_serial_port
+  metadata = local.ssh_keys_and_serial_port
 
 }

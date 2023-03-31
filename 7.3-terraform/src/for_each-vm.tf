@@ -25,7 +25,7 @@ resource "yandex_compute_instance" "vm-each" {
     nat       = true
   }
 
-  metadata = var.ssh_keys_and_serial_port
+  metadata = local.ssh_keys_and_serial_port
 }
 
 variable "vm_resources" {

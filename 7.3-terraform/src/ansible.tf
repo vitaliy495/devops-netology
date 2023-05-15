@@ -1,5 +1,6 @@
 resource "local_file" "hosts_cfg" {
-  depends_on = [yandex_compute_instance.vm-each, yandex_compute_instance.web, yandex_compute_instance.wm-disk]
+  sleep= 30 
+  #depends_on = [yandex_compute_instance.vm-each, yandex_compute_instance.web, yandex_compute_instance.wm-disk]
   content = templatefile("${path.module}/hosts.tftpl",
 
     { web = yandex_compute_instance.web, 

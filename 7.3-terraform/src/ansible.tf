@@ -17,10 +17,13 @@ resource "null_resource" "web_hosts_provision" {
 depends_on = [yandex_compute_instance.vm-each]
 
 #Добавление ПРИВАТНОГО ssh ключа в ssh-agent
-# provisioner "local-exec" {
-#    command = "eval $(ssh-agent -s) | cat ~/.ssh/id_ed25519 | ssh-add -"
-# }
-
+ provisioner "local-exec" {
+    command = "eval $(ssh-agent -s) && echo $? | cat ~/.ssh/id_ed25519 | ssh-add -"
+ }
+ 
+ provisioner "local-exec" {
+ command = "sleep 30"
+ }
 #Запуск ansible-playbook
  provisioner "local-exec" {                  
     command  = "export ANSIBLE_HOST_KEY_CHECKING=False; ansible-playbook -i ${abspath(path.module)}/hosts.cfg ${abspath(path.module)}/test.yml"

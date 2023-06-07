@@ -2,7 +2,8 @@
 terraform {
   required_providers {
     yandex = { source = "yandex-cloud/yandex"
-  }}
+   }
+  }
   required_version = ">= 0.13"
 }
 
@@ -37,7 +38,9 @@ resource "yandex_compute_instance" "example" {
   platform_id = "standard-v1"
 
   resources {
-    cores  = 2, memory = 1, core_fraction = 5
+    cores  = 2
+    memory = 1
+    core_fraction = 5
   }
 
   boot_disk {

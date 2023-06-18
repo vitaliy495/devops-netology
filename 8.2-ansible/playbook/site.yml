@@ -1,6 +1,6 @@
 ---
 - name: Install Clickhouse
-  hosts: clickhouse
+  hosts: clickhouse-01
   handlers:
     - name: Start clickhouse service
       become: true
@@ -12,13 +12,13 @@
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
-            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.noarch.rpm"
           with_items: "{{ clickhouse_packages }}"
       rescue:
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
-            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
     - name: Install clickhouse packages
       become: true
       ansible.builtin.yum:
@@ -36,10 +36,20 @@
       changed_when: create_db.rc == 0
 
 - name: Install Vector
-  hosts: vector
+  hosts: vector-01
   handlers:
-        - name: Start vector service
+    - name: Start vector service
       become: true
       ansible.builtin.service:
         name: vector
         state: started
+  tasks:
+     - name: Get package vector
+       ansible.builtin.get_url:
+         url: https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm
+         dest: ./vector-{{ vector_version }}-1.x86_64.rpm
+     - name: Install vector package
+       become: true
+       ansible.builtin.yum:
+         name: vector-latest-1.x86_64.rpm
+       notify: Start vector service

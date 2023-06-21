@@ -1,0 +1,20 @@
+---
+sources:
+  demo_logs:
+    type: demo_logs
+#    count: 9223372036854776000
+    format: syslog
+#    interval: 1
+#    lines:
+#      - line1
+sinks:
+  to_clickhouse:
+    type: clickhouse
+    inputs:
+      - demo_logs
+    compression: gzip
+    database: logs
+    endpoint: http://84.252.128.19:8123
+    table: vector_table
+    skip_unknown_fields: true
+    healthcheck: true

@@ -82,11 +82,12 @@
     - name: nginx start
       become: true
       ansible.builtin.service:
-        name=nginx
-        state=started
+        name: nginx
+        enable: yes
+        state: started
     - name: nginx reload
       become: true
-      command: sudo systemctl restart nginx && nginx -s reload
+      command: nginx -s reload
   tasks:
     - name: Install epel-release
       become: true

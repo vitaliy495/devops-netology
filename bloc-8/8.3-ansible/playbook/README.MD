@@ -1,4 +1,6 @@
 ###Описание Playbook
+## Инфаструктура задается terraform и им же создаеться файл inventory/prod.yml
+
 1. PLAY Install Clickhouse
 на хосте clickhouse-01
 tasks: Get clickhouse distrib
@@ -9,8 +11,6 @@ tasks: Create database
 - создает database с именем logs
 tasks: Create table
 - создает в database таблицу с именем vector_logs
-tasks:  Open port 8123
-- открываем порт 8123 
 tasks: Create clickhouse-server config
 - копируем конфиг для clickhouse-server из templates чтобы слушать на всех адресах
 tasks: ch-server restart

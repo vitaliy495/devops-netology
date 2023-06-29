@@ -2,7 +2,7 @@
 %{~ for i in wm-each }
 ${i["name"]}:
   hosts:
-    ${i["name"]}1:
+    ${i["name"]}-01:
       ansible_host: ${i["network_interface"][0]["nat_ip_address"]}
       ansible_user: centos
 %{ endfor ~}

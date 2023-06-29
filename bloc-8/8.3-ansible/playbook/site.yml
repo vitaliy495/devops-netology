@@ -41,7 +41,7 @@
       failed_when: create_table.rc != 0 and create_table.rc !=82
       changed_when: create_table.rc == 1
 
-#open port for web server
+#open port for  clickhouse-server
 #    - name: Open port 8123
 #      ansible.builtin.command: "sudo firewall-cmd --add-port=8123/tcp"
 #      register: open_port

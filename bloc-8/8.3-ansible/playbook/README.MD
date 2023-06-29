@@ -1,11 +1,56 @@
 ###Описание Playbook
-1. site.yml Устанавливает на хосты clickhouse и vector nginx lighthouse
-2. вся инфракструктура поднимается terraform
-3. terraform создает файл с хостами и кладет в inventory/prod.yml 
-3. group_vars/lighthouse/lighthouse.yml Переменные для lighthouse
-4. group_vars/clickhouse/clickhose.yml Переменные по версиям и устанавливаемому ПО от clickhouse
-5. group_vars/vector/vector.yml Переменная по версии Vector
-6. template/nginx.conf.j2 файл конфиг для вебсервера nginx
-7. template/nginx_lighthouse.j2 конфиг для lighthouse 
-8. template/vector.yml.j2 конфиг vector 
-9. template/vector.service.j2 конфиг для systemd 
+1. PLAY Install Clickhouse
+на хосте clickhouse-01
+tasks: Get clickhouse distrib
+- скачивает дистрибутив clickhouse(client,server)
+tasks: Install clickhouse packages
+-устанавливает пакеты clickhouse и запускает сервер
+tasks: Create database
+- создает database с именем logs
+tasks: Create table
+- создает в database таблицу с именем vector_logs
+tasks:  Open port 8123
+- открываем порт 8123 
+tasks: Create clickhouse-server config
+- копируем конфиг для clickhouse-server из templates чтобы слушать на всех адресах
+tasks: ch-server restart
+- перезапускаем clickhouse-server с измененным конфигом 
+
+2. PLAY Install Vector
+на хосте vector-01
+tasks: Get package vector
+- скачиваем дистрибутив vector 
+tasks: Install vector package
+-  устанавливаем пакет vector
+tasks: Vector config file
+- копируем конфиг для vector из templates
+tasks: Vector systemd service file
+- копируем конфиг файла для службы vector из templates
+и идем в notify: Start Vector service для перезапуска службы
+tasks: Add epel-release repo
+- ставим репозиторий epel-release
+tasks: Install nginx
+- устанавливаем веб сервер nginx 
+tasks: Create nginx config
+- копируем конфиг для nginx из templates для создания логов для vector
+tasks: Start NGiNX
+- включаем службу и перезапускаем nginx
+ и идем в notify: Start Vector service для перезапуска службы vector
+
+3. PLAY Install nginx
+на хосте lighthouse-01
+tasks: Add epel-release
+- ставим репозиторий epel-release
+tasks: Install nginx
+- устанавливаем веб сервер nginx 
+
+
+4. PLAY Install lighthouse
+на хосте lighthouse-01
+pre_tasks: 
+- установка git
+tasks: Lighthouse | Clone repository
+- скачиваем lighthouse через git и копируем в папку {{ lighthouse_dir }} 
+tasks: Create Lighthouse config
+- копикопируем конфиг для lighthouse для веб сервера nginx из templates 
+и последующее перезапуск веб сервера notify: nginx restarted

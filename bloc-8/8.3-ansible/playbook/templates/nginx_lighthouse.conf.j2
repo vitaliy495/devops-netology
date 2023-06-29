@@ -32,12 +32,13 @@ http {
     # for more information.
     include /etc/nginx/conf.d/*.conf;
 
-    server {
-        listen       80;
-        listen       [::]:80;
-        server_name  _;
-        root         /usr/share/nginx/html;
-
+server {
+        listen {{ lighthouse_port }};
+        listen [::]:{{ lighthouse_port }};
+        root {{ lighthouse_dir }};
+        index index.html index.htm;
+        server_name _;
+       
         # Load configuration files for the default server block.
         include /etc/nginx/default.d/*.conf;
 
@@ -48,5 +49,5 @@ http {
         error_page 500 502 503 504 /50x.html;
         location = /50x.html {
         }
-    }
+}
 }

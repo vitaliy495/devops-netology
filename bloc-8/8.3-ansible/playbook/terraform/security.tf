@@ -27,7 +27,12 @@ variable "security_group_ingress" {
       description    = "разрешить входящий https"
       v4_cidr_blocks = ["0.0.0.0/0"]
       port           = 443
-    },
+    }, {
+      protocol       = "TCP"
+      description    = "разрешить входящий https"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      port           = 8123
+    }
   ]
 }
 

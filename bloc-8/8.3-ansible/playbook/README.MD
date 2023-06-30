@@ -54,3 +54,16 @@ tasks: Lighthouse | Clone repository
 tasks: Create Lighthouse config
 - копикопируем конфиг для lighthouse для веб сервера nginx из templates 
 и последующее перезапуск веб сервера notify: nginx restarted
+
+5. Variables используемые 
+- group_vars\clickhouse\clickhouse.yml
+clickhouse_version -- задаем версию приложения для установки
+clickhouse_packages -- список пакетов для установки
+- group_vars\lighthouse\lighthouse.yml
+lighthouse_url -- ссылка где находится дистрибутив
+lighthouse_dir -- директория куда копировать дистрибутив и откуда запускается веб-приложение
+lighthouse_port -- порт на котором будет доступен lighthouse
+- group_vars\vecto\vector.yml
+vector_version -- задаем версию для установки пакета vector
+- templates\vector.toml.j2
+{{ hostvars['clickhouse-01'].ansible_host }} -- получение IP адреса хоста clickhouse-01 

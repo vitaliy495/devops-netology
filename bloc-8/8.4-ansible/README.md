@@ -37,10 +37,10 @@
 10. Выложите playbook в репозиторий.
 11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.
 
-```
-[LightHouse-role](https://github.com/vitaliy495/lighthouse-role)
+[lighthouse-role](https://github.com/vitaliy495/lighthouse-role)
+
 [vector-role](https://github.com/vitaliy495/vector-role)
-```
+
 ---
 
 ### Как оформить решение задания

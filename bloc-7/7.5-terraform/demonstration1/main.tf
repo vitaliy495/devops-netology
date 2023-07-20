@@ -1,9 +1,8 @@
-/*
 terraform {
   required_providers {
     yandex = {
       source = "yandex-cloud/yandex"
-      version = "~> 0.95.0"
+      version = "~> 0.89.0"
     }
     template = "~> 2.0"
 
@@ -11,16 +10,16 @@ terraform {
   required_version = ">=0.13"
   backend "s3" {
     endpoint = "storage.yandexcloud.net"
-    bucket = "tfstate-develop-vit"
+    bucket = "tfstate-netology"
     region = "ru-central1"
     key = "terraform.tfstate"
     skip_region_validation = true
     skip_credentials_validation = true
-    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1g8roqvnljdcrg08i45/etnji3806a6ica5gfld8"
-    dynamodb_table = "table215"
+    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1g8isf6e7r1t01j6ejk/etnh7au2qt7ncms7727b"
+    dynamodb_table = "tfstate-netology"
   }
 }
-*/
+
 provider "yandex" {
   service_account_key_file = var.service_account_key_file
   cloud_id                 = var.cloud_id
@@ -54,7 +53,7 @@ module "test-vm" {
   depends_on = [yandex_vpc_security_group.example]
   source   = "git::https://github.com/udjin10/yandex_compute_instance?ref=main"
   env_name = "develop"
-  # network_id      = yandex_vpc_network.develop.id                                               
+  # network_id      = yandex_vpc_network.develop.id
   network_id     = module.vpc_dev.vpc_id
   subnet_zones   = [module.vpc_dev.vpc_zones]
   subnet_ids     = [module.vpc_dev.subnet_id]

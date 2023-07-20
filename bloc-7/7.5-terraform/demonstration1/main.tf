@@ -51,7 +51,7 @@ resource "yandex_vpc_subnet" "develop" {
 
 module "test-vm" {
   depends_on = [yandex_vpc_security_group.example]
-  source   = "git::https://github.com/udjin10/yandex_compute_instance?ref=test"
+  source   = "git::https://github.com/udjin10/yandex_compute_instance?ref=main"
   env_name = "develop"
   # network_id      = yandex_vpc_network.develop.id
   network_id     = module.vpc_dev.vpc_id

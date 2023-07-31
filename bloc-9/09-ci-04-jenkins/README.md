@@ -18,9 +18,11 @@
 7. Проверить работоспособность, исправить ошибки, исправленный Pipeline вложить в репозиторий в файл `ScriptedJenkinsfile`.
 8. Отправить ссылку на репозиторий с ролью и Declarative Pipeline и Scripted Pipeline.
 
-![repo](https://github.com/vitaliy495/vector-role/tree/master)
-![declarative](https://github.com/vitaliy495/vector-role/blob/master/Jenkinsfile)
-![scripted](pipeline/Jenkinsfile)
+[repo](https://github.com/vitaliy495/vector-role/tree/master)
+
+[declarative](https://github.com/vitaliy495/vector-role/blob/master/Jenkinsfile)
+
+[scripted](pipeline/Jenkinsfile)
 
 ## Необязательная часть
 

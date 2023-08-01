@@ -22,6 +22,7 @@
 
 [declarative](https://github.com/vitaliy495/vector-role/blob/master/Jenkinsfile)
 
+в сборке надо указать что она параметизированая и передавать параметр, или же дописать во 2 шаг prod_run = 'false' или 'true', мне показалось через сборку это правильнее
 [scripted](pipeline/Jenkinsfile)
 
 ## Необязательная часть

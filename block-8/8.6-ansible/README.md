@@ -156,23 +156,82 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
 Или возьмите это наполнение [из статьи](https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_general.html#creating-a-module).
 
 **Шаг 3.** Заполните файл в соответствии с требованиями Ansible так, чтобы он выполнял основную задачу: module должен создавать текстовый файл на удалённом хосте по пути, определённом в параметре `path`, с содержимым, определённым в параметре `content`.
 
+```yml
+---
+- name: Test module
+  hosts: localhost
+  tasks:
+  - name: start module
+    my_own_module:
+      path: './test_file.txt'
+      content: "Module work&good!"
+```
+
 **Шаг 4.** Проверьте module на исполняемость локально.
+
+```json
+python -m ansible.modules.my_own_module test.json
+
+{"changed": false, "original_message": "", "message": "file exists", "invocation": {"module_args": {"path": "./test_module.txt", "content": "Module work&good=)!"}}}
+```
 
 **Шаг 5.** Напишите single task playbook и используйте module в нём.
 
+```yml
+---
+- name: Test module
+  hosts: localhost
+  tasks:
+  - name: start module
+    my_own_module:
+      path: './test_file.txt'
+      content: "Module work&good!"
+```
+
 **Шаг 6.** Проверьте через playbook на идемпотентность.
+
+```yml
+PLAY [Test module] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [start module] ************************************************************
+ok: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
 
 **Шаг 7.** Выйдите из виртуального окружения.
 
 **Шаг 8.** Инициализируйте новую collection: `ansible-galaxy collection init my_own_namespace.yandex_cloud_elk`.
 
+```bash
+ansible-galaxy collection init my_own_namespace.yandex_cloud_elk
+run Ansible from "devel" if you are modifying the Ansible engine, or trying out
+features under development. This is a rapidly changing source of code and can
+become unstable at any point.
+- Collection my_own_namespace.yandex_cloud_elk was created successfully
+```
+
 **Шаг 9.** В эту collection перенесите свой module в соответствующую директорию.
 
 **Шаг 10.** Single task playbook преобразуйте в single task role и перенесите в collection. У role должны быть default всех параметров module.
+
+```bash
+ansible-galaxy role init single_task_role
+[WARNING]: You are running the development version of Ansible. You should only
+run Ansible from "devel" if you are modifying the Ansible engine, or trying out
+features under development. This is a rapidly changing source of code and can
+become unstable at any point.
+- Role single_task_role was created successfully
+```
 
 **Шаг 11.** Создайте playbook для использования этой role.
 
@@ -180,13 +239,49 @@ if __name__ == '__main__':
 
 **Шаг 13.** Создайте .tar.gz этой collection: `ansible-galaxy collection build` в корневой директории collection.
 
+```bash
+ansible-galaxy collection build
+Created collection for my_own_namespace.yandex_cloud_elk at /home/mastervit/ansible/my_own_namespace/yandex_cloud_elk/my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz
+```
+
 **Шаг 14.** Создайте ещё одну директорию любого наименования, перенесите туда single task playbook и архив c collection.
 
 **Шаг 15.** Установите collection из локального архива: `ansible-galaxy collection install <archivename>.tar.gz`.
 
+```bash
+ansible-galaxy collection install my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Installing 'my_own_namespace.yandex_cloud_elk:1.0.0' to '/home/mastervit/.ansible/collections/ansible_collections/my_own_namespace/yandex_cloud_elk'
+my_own_namespace.yandex_cloud_elk:1.0.0 was installed successfully
+```
+
 **Шаг 16.** Запустите playbook, убедитесь, что он работает.
 
+```bash
+new$ ansible-playbook single_task.yml
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+
+PLAY [Test module] *********************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************
+ok: [localhost]
+
+TASK [start module] ********************************************************************************
+changed: [localhost]
+
+PLAY RECAP *****************************************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 **Шаг 17.** В ответ необходимо прислать ссылки на collection и tar.gz архив, а также скриншоты выполнения пунктов 4, 6, 15 и 16.
+
+[collection](https://github.com/vitaliy495/my_own_collection)
+
+[tar.gz архив](my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz)
+
 
 ## Необязательная часть
 

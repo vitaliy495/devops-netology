@@ -4,20 +4,21 @@ terraform {
       source = "yandex-cloud/yandex"
       version = "~> 0.95.0"
     }
-    template = "~> 2.0"
-
+    template = "~> 2.2.0"
   }
   required_version = ">=0.13"
+  
   backend "s3" {
     endpoint = "storage.yandexcloud.net"
-    bucket = "tfstate-develop-vit"
+    bucket = "vits3"
     region = "ru-central1"
     key = "terraform.tfstate"
     skip_region_validation = true
     skip_credentials_validation = true
-    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1g8roqvnljdcrg08i45/etnji3806a6ica5gfld8"
-    dynamodb_table = "table215"
+    dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1g8roqvnljdcrg08i45/etndqgdl7q6kbuje2ae2"
+    dynamodb_table = "table113"
   }
+
 }
 
 provider "yandex" {
@@ -42,6 +43,7 @@ resource "yandex_vpc_subnet" "develop" {
   v4_cidr_blocks = ["10.0.1.0/24"]
 }
 
+/*
 module "test-vm" {
   source          = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
   env_name        = "develop"
@@ -59,6 +61,7 @@ module "test-vm" {
   }
 
 }
+*/
 
 #Пример передачи cloud-config в ВМ для демонстрации №3
 data "template_file" "cloudinit" {

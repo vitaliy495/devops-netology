@@ -1,4 +1,4 @@
-/*
+
 terraform {
   required_providers {
     yandex = {
@@ -9,6 +9,7 @@ terraform {
 
   }
   required_version = ">=0.13"
+  /*
   backend "s3" {
     endpoint = "storage.yandexcloud.net"
     bucket = "tfstate-develop-vit"
@@ -18,9 +19,9 @@ terraform {
     skip_credentials_validation = true
     dynamodb_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1g8roqvnljdcrg08i45/etnji3806a6ica5gfld8"
     dynamodb_table = "table215"
-  }
+  }*/
 }
-*/
+
 provider "yandex" {
   service_account_key_file = var.service_account_key_file
   cloud_id                 = var.cloud_id

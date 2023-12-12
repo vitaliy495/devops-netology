@@ -28,9 +28,4 @@ resource "yandex_vpc_security_group" "group1" {
     port           = 443
   }
 
-    ingress {
-    protocol       = "ANy"
-    description    = "any"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
 }

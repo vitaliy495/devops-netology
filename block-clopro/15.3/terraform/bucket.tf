@@ -67,3 +67,39 @@ resource "yandex_storage_bucket" "test" {
     yandex_iam_service_account_static_access_key.static-access-key
   ]
 }
+
+resource "yandex_storage_object" "index-html" {
+  access_key = yandex_iam_service_account_static_access_key.static-access-key.access_key
+  secret_key = yandex_iam_service_account_static_access_key.static-access-key.secret_key
+  bucket     = "vitnek.ru"
+  key        = "index.html"
+  source     = "./index.html"
+  acl        = "public-read-write"
+  depends_on = [
+    yandex_storage_bucket.test
+  ]
+}
+
+resource "yandex_storage_object" "ogon2" {
+  access_key = yandex_iam_service_account_static_access_key.static-access-key.access_key
+  secret_key = yandex_iam_service_account_static_access_key.static-access-key.secret_key
+  bucket     = "vitnek.ru"
+  key        = "ogon.jpg"
+  source     = "./ogon.jpg"
+  acl        = "public-read-write"
+  depends_on = [
+    yandex_storage_bucket.test
+  ]
+}
+
+resource "yandex_storage_object" "error" {
+  access_key = yandex_iam_service_account_static_access_key.static-access-key.access_key
+  secret_key = yandex_iam_service_account_static_access_key.static-access-key.secret_key
+  bucket     = "vitnek.ru"
+  key        = "error.html"
+  source     = "./error.html"
+  acl        = "public-read-write"
+  depends_on = [
+    yandex_storage_bucket.test
+  ]
+}

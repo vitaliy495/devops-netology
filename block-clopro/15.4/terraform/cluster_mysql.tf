@@ -4,7 +4,7 @@ resource "yandex_mdb_mysql_cluster" "my-mysql-3" {
   network_id          = yandex_vpc_network.network.id
   version             = "8.0"
   security_group_ids  = [ yandex_vpc_security_group.mysql-sg.id ]
-  deletion_protection = false
+  deletion_protection = true
 
   maintenance_window {
     type = "ANYTIME"

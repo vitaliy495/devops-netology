@@ -1,4 +1,4 @@
-resource "local_file" "inventory" {
+resource "local_file" "deployment" {
   content = <<-DOC
 apiVersion: apps/v1
 kind: Deployment
@@ -52,6 +52,6 @@ spec:
   filename = "./myphp.yaml"
 
   depends_on = [
-    yandex_mdb_mysql_cluster.my-mysql-3
+        yandex_mdb_mysql_cluster.my-mysql-3,
   ]
 }

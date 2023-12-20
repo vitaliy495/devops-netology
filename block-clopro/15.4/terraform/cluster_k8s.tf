@@ -1,11 +1,4 @@
 resource "yandex_kubernetes_cluster" "k8s-regional" {
-#  depends_on = [ yandex_kms_symmetric_key.kms-key, 
-#  yandex_iam_service_account_static_access_key.static-access-key,
-#  yandex_vpc_subnet.public1,
-#  yandex_vpc_subnet.public2,
-#  yandex_vpc_subnet.public3,
-#  yandex_vpc_network.network ]
-
   name       = "k8s-regional"
   network_id = yandex_vpc_network.network.id
   master {
